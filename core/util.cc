@@ -9,9 +9,6 @@ Local<String> No::Util::newStringToLcal(Isolate * isolate, const char * str, New
     return String::NewFromUtf8(isolate, str, type, strlen(str)).ToLocalChecked();
 }
 
-MaybeLocal<String> No::Util::newString(Isolate * isolate, const char * str, NewStringType type) {
-    return String::NewFromUtf8(isolate, str, type, strlen(str));
-}
 
 // 设置对象的属性，属性为函数
 void No::Util::setMethod(Isolate *isolate, 

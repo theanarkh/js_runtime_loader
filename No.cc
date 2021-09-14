@@ -1,20 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <sys/types.h>
 #include "include/v8/libplatform/libplatform.h"
 #include "include/v8/v8.h"
 #include "core/loader.h"
 #include "core/console.h"
+#include "core/process.h"
 #include "core/util.h"
-
 
 using namespace v8;
 using namespace No::Util;
-using namespace No::Core;
 
 int main(int argc, char* argv[]) {
   setvbuf(stdout, nullptr, _IONBF, 0);
@@ -34,8 +29,9 @@ int main(int argc, char* argv[]) {
     Local<Context> context = Context::New(isolate, nullptr, global);
     Context::Scope context_scope(context);
     Local<Object> No = Object::New(isolate);
-    Loader::Init(isolate, No);
-    Console::Init(isolate, No);
+    No::Loader::Init(isolate, No);
+    No::Console::Init(isolate, No);
+    No::Process::Init(isolate, No, argv, argc);
     Local<Object> globalInstance = context->Global();
     globalInstance->Set(context, String::NewFromUtf8Literal(isolate, "No", 
     NewStringType::kNormal), No);

@@ -5,6 +5,7 @@
 #include "util.h"
 #include <vector>
 #include <unistd.h>
+#include <fcntl.h>
 using namespace v8;
 using namespace No::Util;
 
